@@ -9,8 +9,21 @@ class File:
         print("exit")
         self.file.close()
 
-with File("file.txt", "w") as f:
+# with File("file.txt", "w") as f:
+#     print("run")
+#     f.write("xin chao")
+#     #raise Exception()
+
+## using lib
+from contextlib import contextmanager
+
+@contextmanager
+def file(filename, method):
+    file = open(filename, method)
+    yield file
+    file.close()
+
+with file("file.txt", "w") as f:
     print("run")
-    f.write("xin chao")
+    f.write("xin chao contextlib")
     #raise Exception()
-    
